@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <title>Registration form</title>
+        <style>
+            body{
+                background-image:url(images/i2.jpg);
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;    
+            }
+            div.main{
+                width:400px;
+                margin:100px auto 0px auto;
+            }
+            h2{
+                text-align:center;
+                padding:10%;
+                font-family:'Times New Roman', Times, serif;
+            }
+            div.register{
+                background-color:rgba(0,0,0,0.3);
+                width:100%;
+                padding:50px;
+                font-size:medium;
+                border-radius:10px;
+                border:5px solid rgba(0,0,20,0.3);
+            }
+            label{
+                font-style:oblique;
+                font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                font-size:25px;
+            }
+            input#name{
+                width:300px;
+                border:2px solid #ddd;
+                border-radius:8px;
+            }
+            input#submit{
+                width:600px;
+                padding:5px;
+                border:none;
+                border-radius:20px;
+                cursor:pointer;
+            }
+        </style>
+    </head>
+
+    <body>
+        {{>navbar}}
+        <div class="main">
+            <div class="register">
+                <h2>Registration form</h2>
+                <form action="/register" id="reg" method="POST">
+                    <label>First Name:</label></br>
+                    <input type="text" id="fname" name="firstname" placeholder="Enter your first name" required></br></br>
+                    <label>Last Name:</label></br>
+                    <input type="text" id="lname" name="lastname" placeholder="Enter your last name" required></br></br>
+                    <label>Email:</label></br>
+                    <input type="email" id="mail" name="Email" placeholder="Enter the valid email id" required></br></br>
+                    <label>Age:</label></br>
+                    <input type="number" id="age" name="Age" placeholder="Enter your age" required></br></br>
+                    <label>Phone Number:</label><br>
+                    <input type:"tel" name="Phone_Number" pattern="[0-9]{10}" placeholder="[0-9]{10}" required><br><br>
+                    <label>Gender:</label><br>
+                    <input type="radio" name="Gender" value="male"><span> Male </span> &nbsp;&nbsp;
+                    <input type="radio" name="Gender" value="female"><span>Female </span><br><br>
+                    <label>Dance forms:</label><br>
+                    <input type="checkbox"  name="Dance_form" value="Bharatanatyam">
+                    <span id="Bharatanatyam" >Bharatanatyam</span>&nbsp;&nbsp;
+                    <input type="checkbox" name="Dance_form" value="Saalsa">
+                    <span  id="Saalsa" >Saalsa</span>&nbsp;&nbsp;
+                    <input type="checkbox" name="Dance_form" value="Zumba">
+                    <span id="Zumba" >Zumba</span>&nbsp;&nbsp;<br><br>
+                    <input type="checkbox" name="Dance_form" value="Bollywood/freestyle">
+                    <span id="B/F" >Bollywood/freestyle</span>&nbsp;&nbsp;<br><br>
+                    <input type="submit" name="submit" value="Submit"> &nbsp;&nbsp;
+		    <input type="reset" name="reset" value="reset"><br><br>
+		    <a href="index">Back to home</a>
+                </form>
+            </div>
+        </div>
+
+
+    </body>
+</html>
