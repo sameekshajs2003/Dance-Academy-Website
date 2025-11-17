@@ -47,7 +47,7 @@ backup/                    → Old template backups
 ### 1️⃣ Navigate to the project folder
 
 ```
-cd "C:\Users\Sameeksha J S\OneDrive\Desktop\p\Dance-Academy-Website"
+cd path/to/Dance-Academy-Website
 ```
 
 ### 2️⃣ Create your environment file
@@ -63,22 +63,13 @@ MONGO_URI=your_mongodb_uri
 PORT=3000
 ```
 
-### 3️⃣ Move all images to the correct folder
-
-```
-mkdir public\images
-move *.png public\images\
-move *.jpg public\images\
-move *.webp public\images\
-```
-
-### 4️⃣ Install dependencies
+### 3️⃣ Install dependencies
 
 ```
 npm install
 ```
 
-### 5️⃣ Start the app
+### 4️⃣ Start the app
 
 Development:
 
@@ -103,15 +94,3 @@ Registration page → **/register**
 - Form re-fills previously entered data on failure.
 - Multiple dance styles are supported using checkbox arrays.
 - Ensure MongoDB is running if connecting locally.
-
----
-
-## 🔒 Security / Improvements (optional)
-
-- Add `helmet` + rate limiting for production
-- Add `express-validator` for strong backend validation
-- Move to a full MERN stack by adding a React client later
-
----
-
-If you want this README **shorter**, **more aesthetic**, or **with icons/badges**, I can format it accordingly!
