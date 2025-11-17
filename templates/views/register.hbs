@@ -1,0 +1,148 @@
+<html>
+    <head>
+        <title>Registration form</title>
+        <style>
+            body{
+                background-image:url(/images/i2.jpg);
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;    
+            }
+            div.main{
+                width:400px;
+                margin:100px auto 0px auto;
+            }
+            h2{
+                text-align:center;
+                padding:10%;
+                font-family:'Times New Roman', Times, serif;
+            }
+            div.register{
+                background-color:rgba(0,0,0,0.3);
+                width:100%;
+                padding:50px;
+                font-size:medium;
+                border-radius:10px;
+                border:5px solid rgba(0,0,20,0.3);
+            }
+            label{
+                font-style:oblique;
+                font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                font-size:25px;
+            }
+            input#name{
+                width:300px;
+                border:2px solid #ddd;
+                border-radius:8px;
+            }
+            input#submit{
+                width:600px;
+                padding:5px;
+                border:none;
+                border-radius:20px;
+                cursor:pointer;
+            }
+        </style>
+    </head>
+
+    <body>
+        {{>navbar}}
+        <div class="main">
+            <div class="register">
+                {{#if error}}
+                <div style="background:#ffe6e6;color:#900;border-radius:6px;padding:10px;margin-bottom:12px;">
+                    {{error}}
+                </div>
+                {{/if}}
+                                <h2>Registration form</h2>
+                                <div id="client-error" style="display:none;background:#fff4e5;color:#8a4b00;padding:8px;border-radius:6px;margin-bottom:12px;"></div>
+                                <form action="/register" id="reg" method="POST" novalidate>
+                                        <label>First Name:</label></br>
+                                        <input type="text" id="fname" name="firstname" placeholder="Enter your first name" required></br></br>
+                                        <label>Last Name:</label></br>
+                                        <input type="text" id="lname" name="lastname" placeholder="Enter your last name" required></br></br>
+                                        <label>Email:</label></br>
+                                        <input type="email" id="mail" name="Email" placeholder="Enter the valid email id" required></br></br>
+                                        <label>Age:</label></br>
+                                        <input type="number" id="age" name="Age" placeholder="Enter your age" required></br></br>
+                                        <label>Phone Number:</label><br>
+                                        <input type="tel" id="phone" name="Phone_Number" pattern="[0-9]{10}" placeholder="[0-9]{10}" required><br><br>
+                                        <label>Gender:</label><br>
+                                        <input type="radio" id="gender_m" name="Gender" value="male"><span> Male </span> &nbsp;&nbsp;
+                                        <input type="radio" id="gender_f" name="Gender" value="female"><span>Female </span><br><br>
+                                        <label>Dance forms:</label><br>
+                                        <input type="checkbox"  name="Dance_form[]" value="Bharatanatyam">
+                                        <span id="Bharatanatyam" >Bharatanatyam</span>&nbsp;&nbsp;
+                                        <input type="checkbox" name="Dance_form[]" value="Saalsa">
+                                        <span  id="Saalsa" >Saalsa</span>&nbsp;&nbsp;
+                                        <input type="checkbox" name="Dance_form[]" value="Zumba">
+                                        <span id="Zumba" >Zumba</span>&nbsp;&nbsp;<br><br>
+                                        <input type="checkbox" name="Dance_form[]" value="Bollywood/freestyle">
+                                        <span id="B/F" >Bollywood/freestyle</span>&nbsp;&nbsp;<br><br>
+                                        <input type="submit" name="submit" value="Submit"> &nbsp;&nbsp;
+	    <input type="reset" name="reset" value="reset"><br><br>
+	    <a href="/index">Back to home</a>
+                                </form>
+                                <script>
+                                // Server-provided JSON of previous form values
+                                const FORM_DATA = {{{formDataJson}}} || {};
+
+                                function setValue(id, value){
+                                    const el = document.getElementById(id);
+                                    if(!el) return;
+                                    el.value = value || '';
+                                }
+
+                                document.addEventListener('DOMContentLoaded', ()=>{
+                                    // Prefill simple inputs
+                                    setValue('fname', FORM_DATA.firstname);
+                                    setValue('lname', FORM_DATA.lastname);
+                                    setValue('mail', FORM_DATA.Email);
+                                    setValue('age', FORM_DATA.Age);
+                                    setValue('phone', FORM_DATA.Phone_Number);
+
+                                    // Gender
+                                    if(FORM_DATA.Gender){
+                                        const g = document.querySelector(`input[name="Gender"][value="${FORM_DATA.Gender}"]`);
+                                        if(g) g.checked = true;
+                                    }
+
+                                    // Dance_form may be array or string
+                                    let dances = FORM_DATA.Dance_form || FORM_DATA['Dance_form'];
+                                    if(!dances) dances = [];
+                                    if(typeof dances === 'string') dances = [dances];
+                                    // check matching checkboxes
+                                    dances.forEach(val=>{
+                                        const cb = document.querySelector(`input[name="Dance_form[]"][value="${val}"]`);
+                                        if(cb) cb.checked = true;
+                                    });
+
+                                    // Client-side validation
+                                    const form = document.getElementById('reg');
+                                    const clientError = document.getElementById('client-error');
+                                    form.addEventListener('submit', (e)=>{
+                                        clientError.style.display = 'none';
+                                        clientError.textContent = '';
+                                        const email = document.getElementById('mail').value;
+                                        const phone = document.getElementById('phone').value;
+                                        const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                        const phoneRe = /^[0-9]{10}$/;
+                                        let msgs = [];
+                                        if(!emailRe.test(email)) msgs.push('Please enter a valid email address.');
+                                        if(!phoneRe.test(phone)) msgs.push('Please enter a 10-digit phone number.');
+                                        if(msgs.length){
+                                            e.preventDefault();
+                                            clientError.textContent = msgs.join(' ');
+                                            clientError.style.display = 'block';
+                                            window.scrollTo({top: clientError.offsetTop - 20, behavior: 'smooth'});
+                                        }
+                                    });
+                                });
+                                </script>
+            </div>
+        </div>
+
+
+
+    </body>
+</html>
