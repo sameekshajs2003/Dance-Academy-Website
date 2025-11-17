@@ -15,6 +15,18 @@ The website provides the following user-facing features:
 - 🔐 Client- and server-side validation with friendly duplicate checks for email & phone
 
 ---
+## 📸 Screenshots
+
+### 🟦 1. About Us Page  
+<img src="https://github.com/user-attachments/assets/0953d26e-edcd-4df7-9907-e129d25039f5" width="700"/>
+
+### 🟩 2. Dance Class Information  
+<img src="https://github.com/user-attachments/assets/39f73c2e-048a-4fb4-aae1-582848e23294" width="700"/>
+
+### 🟨 3. Registration Form  
+<img src="https://github.com/user-attachments/assets/2697b2a0-66ff-4b07-b825-67ae9c2c410b" width="700"/>
+
+---
 
 ## 🧰 Tech Stack
 
@@ -37,7 +49,6 @@ templates/views/           → Main Handlebars pages
 templates/partials/        → Navbar + shared parts
 public/css/style.css       → Styling
 public/images/             → All website images
-backup/                    → Old template backups
 ```
 
 ---
